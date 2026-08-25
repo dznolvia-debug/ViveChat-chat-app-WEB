@@ -1,0 +1,9 @@
+{
+  "name": "PurpleTalk - WhatsApp Purple Edition",
+  "description": "Aplicación de mensajería y llamadas en tiempo real al estilo WhatsApp con diseño en tonos morados, chat multimedia, videollamadas WebRTC y gestión de contactos por número de teléfono.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique user ID" },
+        "name": { "type": "string", "description": "Display name" },
+        "phone": { "type": "string", "description": "Phone number with country code" },
+        "avatar": { "type": "string", "description": "Avatar image URL" },
+        "about": { "type": "string", "description": "Status message / bio" },
+        "isOnline": { "type": "boolean", "description": "Online presence flag" },
+        "lastSeen": { "type": "number", "description": "Timestamp of last activity" }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "Message": {
+      "title": "Message",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique message ID" },
+        "chatId": { "type": "string", "description": "Composite conversation identifier" },
+        "senderId": { "type": "string", "description": "Sender user ID" },
+        "senderPhone": { "type": "string", "description": "Sender phone number" },
+        "receiverId": { "type": "string", "description": "Receiver user ID" },
+        "receiverPhone": { "type": "string", "description": "Receiver phone number" },
+        "type": { "type": "string", "description": "text | image | video | audio | document" },
+        "content": { "type": "string", "description": "Message text or media caption" },
+        "mediaUrl": { "type": "string", "description": "URL of attached media" },
+        "timestamp": { "type": "number", "description": "Creation timestamp in ms" },
+        "status": { "type": "string", "description": "sent | delivered | read" }
+      },
+      "required": ["id", "senderPhone", "receiverPhone", "timestamp"]
+    },
+    "CallSignal": {
+      "title": "CallSignal",
+      "type": "object",
+      "properties": {
+        "action": { "type": "string", "description": "offer | answer | ice-candidate | end | reject" },
+        "callerPhone": { "type": "string", "description": "Caller phone" },
+        "targetPhone": { "type": "string", "description": "Target phone" },
+        "callType": { "type": "string", "description": "voice | video" },
+        "timestamp": { "type": "number", "description": "Signal timestamp" }
+      },
+      "required": ["action", "callerPhone", "targetPhone", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Registered users on PurpleTalk"
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Chat messages across users"
+    },
+    "/callSignals/{targetPhoneDigits}": {
+      "schema": "CallSignal",
+      "description": "WebRTC and call signals directed to target phone"
+    }
+  }
+}
